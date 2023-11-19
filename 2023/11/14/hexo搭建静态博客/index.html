@@ -1,0 +1,912 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="../../../../asset/image/logo.ico">
+  <link rel="icon" href="../../../../asset/image/logo.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="SpecialCarp">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Hexo搭建静态博客  本文编写时间为 2023-11-14，hexo: 6.3.0，hexo-cli: 4.3.1，可能存在过期内容，仅供参考。最新数据请访问 [官方文档][https:&#x2F;&#x2F;hexo.io&#x2F;zh-cn&#x2F;docs&#x2F;]。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo搭建静态博客">
+<meta property="og:url" content="http://specialcarp.github.io/2023/11/14/hexo%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:site_name" content="SpecialCarp 个人博客">
+<meta property="og:description" content="Hexo搭建静态博客  本文编写时间为 2023-11-14，hexo: 6.3.0，hexo-cli: 4.3.1，可能存在过期内容，仅供参考。最新数据请访问 [官方文档][https:&#x2F;&#x2F;hexo.io&#x2F;zh-cn&#x2F;docs&#x2F;]。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-11-14T02:05:37.000Z">
+<meta property="article:modified_time" content="2023-11-19T04:04:09.000Z">
+<meta property="article:author" content="SpecialCarp">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="博客">
+<meta property="article:tag" content="nodejs">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>hexo搭建静态博客  SpecialCarp 个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="../../../../css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="../../../../css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="../../../../css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"specialcarp.github.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="../../../../js/utils.js" ></script>
+  <script  src="../../../../js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="../../../../index.html">
+      <strong>SpecialCarp</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="../../../../index.html" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="../../../../archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="../../../../categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="../../../../tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="../../../../about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="../../../../links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('../../../../asset/image/banner1.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="hexo搭建静态博客"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-11-14 10:05" pubdate>
+          2023年11月14日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          17 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">hexo搭建静态博客</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：19 分钟前
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1>Hexo搭建静态博客</h1>
+<blockquote>
+<p>本文编写时间为 2023-11-14，hexo: 6.3.0，hexo-cli: 4.3.1，可能存在过期内容，仅供参考。最新数据请访问 [官方文档][<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a>]。</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="环境要求">环境要求</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://nodejs.org/">Node.js</a> (Node.js 版本需不低于 10.13，建议使用 Node.js 12.0 及以上版本)</li>
+<li><a target="_blank" rel="noopener" href="http://git-scm.com/">Git</a></li>
+</ul>
+<h2 id="安装-Hexo">安装 Hexo</h2>
+<p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install -g hexo-cli<br></code></pre></td></tr></table></figure>
+<p>查看版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo -v<br></code></pre></td></tr></table></figure>
+<h2 id="新建项目">新建项目</h2>
+<p>安装 Hexo-cli 完成后，请执行下列命令，Hexo 将会在指定文件夹中创建所需要的文件。<code>&lt;folder&gt;</code> 就是你项目的名称。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo init &lt;folder&gt;<br><span class="hljs-built_in">cd</span> &lt;folder&gt;<br>npm install<br></code></pre></td></tr></table></figure>
+<p>新建完成后，项目文件夹的目录如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs te">.<br>├── _config.yml     -- 配置文件<br>├── package.json    -- 依赖信息<br>├── scaffolds       -- 模板<br>├── source          -- 源文件<br>|   ├── _drafts       -- 文章<br>|   └── _posts        -- 草稿<br>└── themes			-- 主题<br></code></pre></td></tr></table></figure>
+<p>本地预览：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 在项目根目录下执行以下命令</span><br><span class="hljs-comment"># 启动本地服务</span><br>hexo server<br></code></pre></td></tr></table></figure>
+<p>此时，访问 <code>http://localhost:4000/</code> 即可，当前项目只有一篇自带的 hello-world 文章，其文件在项目的<code>source\_posts</code> 目录下，在命令行工具中 <code>Ctrl + C</code> 即可停止项目。</p>
+<p>如果启动失败请删除 <code>node_moudle</code> 目录，然后在项目根目录下执行 <code>npm install</code> 命令重新下载依赖。</p>
+<h3 id="hexo-简单命令">hexo 简单命令</h3>
+<p><strong>新建项目</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo init [folder]<br></code></pre></td></tr></table></figure>
+<p>新建一个网站。如果没有设置 <code>folder</code> ，Hexo 默认在目前的文件夹建立网站。</p>
+<p>本命令相当于执行了以下几步：</p>
+<ol>
+<li>Git clone <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-starter">hexo-starter</a> 和 <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-theme-landscape">hexo-theme-landscape</a> 主题到当前目录或指定目录。</li>
+<li>使用 <a target="_blank" rel="noopener" href="https://classic.yarnpkg.com/lang/en/">Yarn</a>、<a target="_blank" rel="noopener" href="https://pnpm.js.org/">pnpm</a> 或 <a target="_blank" rel="noopener" href="https://docs.npmjs.com/cli/install">npm</a> 包管理器下载依赖（如有已安装多个，则列在前面的优先）。npm 默认随 <a target="_blank" rel="noopener" href="https://hexo.io/docs/#Install-Node-js">Node.js</a> 安装。</li>
+</ol>
+<p><strong>新建文章</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo new &lt;title&gt;<br></code></pre></td></tr></table></figure>
+<p>Hexo 会根据 <code>scaffolds</code> 目录下的模板 <code>post.md</code> ，在 <code>source\_posts</code> 目录下生成一个 <code>&lt;title&gt;.md</code> 文件。</p>
+<p><strong>生成静态文件</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo generate<br><span class="hljs-comment"># OR 简写为</span><br>hexo g<br></code></pre></td></tr></table></figure>
+<p>Hexo 会根据 <code>_config.yml</code> 的配置，在根目录 <code>public</code> 下生成静态网站文件，通过部署 nginx、github pages、gitee pages 或其他服务器上，即可通过网络访问。</p>
+<p><strong>启动本地服务</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo server<br><span class="hljs-comment"># OR 简写为</span><br>hexo s<br></code></pre></td></tr></table></figure>
+<p>Hexo 会在本地的 <code>4000</code> 端口开启一个服务，用于调试和本地查看。</p>
+<p><strong>清除已生成的文件</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo clean<br></code></pre></td></tr></table></figure>
+<p>清除缓存文件 (<code>db.json</code>) 和已生成的静态文件 (<code>public</code>)。</p>
+<p>在某些情况（尤其是更换主题后），如果发现您对站点的更改无论如何也不生效，您可能需要运行该命令。</p>
+<h2 id="引用外部资源文件">引用外部资源文件</h2>
+<blockquote>
+<p>标准的 markdown 语法 <code>![]()</code> 在 hexo 编译静态文件时，会导致文件路径不对，<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/asset-folders">hexo 官方</a>提供了模板语法 <code>&#123;% asset_path slug [title] %&#125;</code> ，这样会导致正常的笔记和项目中的文件出现两种引用，既然是基于 markdown 的博客项目，那么一切都要以正常的 markdown 语法为主。</p>
+<p>官方提供了一个新的选择：<code>hexo-renderer-marked</code> ，但是不好用，它需要你将所有的资源文件放到一个资源文件夹下。</p>
+</blockquote>
+<p>修改根目录下的 <code>_config.yml</code> ：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">post_asset_folder:</span> <span class="hljs-literal">true</span><br><span class="hljs-attr">marked:</span><br>  <span class="hljs-attr">prependRoot:</span> <span class="hljs-literal">true</span>	<br>  <span class="hljs-attr">postAsset:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>post_asset_folder: true</code>: 这个配置项是 Hexo 中用于开启或关闭文章资产文件夹功能。当设置为 <code>true</code> 时，Hexo 会在每篇文章对应的文件夹中创建一个与文章同名的资源文件夹，用于存放与该篇文章相关的资源文件（如图片、附件等）。</li>
+<li><code>marked</code>: 这个配置项是与 Markdown 渲染相关的配置。
+<ul>
+<li><code>prependRoot: true</code>: 当设置为 <code>true</code> 时，它会将相对路径的图片链接转换为以站点根目录开头的绝对路径。这样设置后，在生成的页面中，图片的链接将从站点根目录开始。</li>
+<li><code>postAsset: true</code>: 当设置为 <code>true</code> 时，允许在文章中使用相对路径引用位于文章资产文件夹中的资源文件。也就是说，当您在文章中引用图片等资源时，可以使用相对路径，资源文件将会被正确引用和显示。</li>
+</ul>
+</li>
+</ul>
+<h3 id="hexo-asset-image">hexo-asset-image</h3>
+<blockquote>
+<p>这个插件在开启 <code>post_asset_folder: true</code> 的情况下，默认你的资源文件夹是文章同目录下的同名文件夹，在执行 <code>hexo g</code> 之后，hexo 会把资源文件夹下的文件全部复制到生成后的文章目录下。</p>
+  <figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs tcl">└── <span class="hljs-keyword">source</span><br>  └── _posts<br>    ├── hexo<br>    │ └── <span class="hljs-keyword">filename</span>.jpg<br>    └── hexo.md<br></code></pre></td></tr></table></figure>
+  <figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs axapta">└── <span class="hljs-keyword">public</span><br>  └── <span class="hljs-number">2023</span><br>    └── <span class="hljs-number">9</span><br>      └── <span class="hljs-number">5</span><br>        └── hexo<br>          ├── filename.jpg<br>          └── <span class="hljs-keyword">index</span>.html<br></code></pre></td></tr></table></figure>
+<p>这个插件会修改你生成后的文章（ <code>index.html</code>）中的 <code>&lt;img&gt;</code>的 src 属性。</p>
+</blockquote>
+<p><code>hexo-asset-image</code> 则会根据你在笔记中的引入路径去编译相应的资源文件路径。</p>
+<p>下载插件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm i hexo-asset-image<br></code></pre></td></tr></table></figure>
+<p>修改 <code>node_modules/hexo-asset-image/index.js</code> 的代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-meta">&#x27;use strict&#x27;</span>;<br><span class="hljs-keyword">var</span> cheerio = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;cheerio&#x27;</span>);<br><span class="hljs-comment">// http://stackoverflow.com/questions/14480345/how-to-get-the-nth-occurrence-in-a-string</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">getPosition</span>(<span class="hljs-params">str, m, i</span>) &#123;<br>  <span class="hljs-keyword">return</span> str.<span class="hljs-title function_">split</span>(m, i).<span class="hljs-title function_">join</span>(m).<span class="hljs-property">length</span>;<br>&#125;<br><span class="hljs-keyword">var</span> version = <span class="hljs-title class_">String</span>(hexo.<span class="hljs-property">version</span>).<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;.&#x27;</span>);<br>hexo.<span class="hljs-property">extend</span>.<span class="hljs-property">filter</span>.<span class="hljs-title function_">register</span>(<span class="hljs-string">&#x27;after_post_render&#x27;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params">data</span>) &#123;<br>  <span class="hljs-keyword">var</span> config = hexo.<span class="hljs-property">config</span>;<br>  <span class="hljs-keyword">if</span> (config.<span class="hljs-property">post_asset_folder</span>) &#123;<br>    <span class="hljs-keyword">var</span> link = data.<span class="hljs-property">permalink</span>;<br>    <span class="hljs-keyword">if</span> (version.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-title class_">Number</span>(version[<span class="hljs-number">0</span>]) == <span class="hljs-number">3</span>)<br>      <span class="hljs-keyword">var</span> beginPos = <span class="hljs-title function_">getPosition</span>(link, <span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-number">1</span>) + <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">else</span><br>      <span class="hljs-keyword">var</span> beginPos = <span class="hljs-title function_">getPosition</span>(link, <span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-number">3</span>) + <span class="hljs-number">1</span>;<br>    <span class="hljs-comment">// In hexo 3.1.1, the permalink of &quot;about&quot; page is like &quot;.../about/index.html&quot;.</span><br>    <span class="hljs-keyword">var</span> endPos = link.<span class="hljs-title function_">lastIndexOf</span>(<span class="hljs-string">&#x27;/&#x27;</span>) + <span class="hljs-number">1</span>;<br>    link = link.<span class="hljs-title function_">substring</span>(beginPos, endPos);<br>    <span class="hljs-keyword">var</span> toprocess = [<span class="hljs-string">&#x27;excerpt&#x27;</span>, <span class="hljs-string">&#x27;more&#x27;</span>, <span class="hljs-string">&#x27;content&#x27;</span>];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; toprocess.<span class="hljs-property">length</span>; i++) &#123;<br>      <span class="hljs-keyword">var</span> key = toprocess[i];<br>      <span class="hljs-keyword">var</span> $ = cheerio.<span class="hljs-title function_">load</span>(data[key], &#123;<br>        <span class="hljs-attr">ignoreWhitespace</span>: <span class="hljs-literal">false</span>,<br>        <span class="hljs-attr">xmlMode</span>: <span class="hljs-literal">false</span>,<br>        <span class="hljs-attr">lowerCaseTags</span>: <span class="hljs-literal">false</span>,<br>        <span class="hljs-attr">decodeEntities</span>: <span class="hljs-literal">false</span><br>      &#125;);<br>      $(<span class="hljs-string">&#x27;img&#x27;</span>).<span class="hljs-title function_">each</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">if</span> ($(<span class="hljs-variable language_">this</span>).<span class="hljs-title function_">attr</span>(<span class="hljs-string">&#x27;src&#x27;</span>)) &#123;<br>          <span class="hljs-comment">// For windows style path, we replace &#x27;\&#x27; to &#x27;/&#x27;.</span><br>          <span class="hljs-keyword">var</span> src = $(<span class="hljs-variable language_">this</span>).<span class="hljs-title function_">attr</span>(<span class="hljs-string">&#x27;src&#x27;</span>).<span class="hljs-title function_">replace</span>(<span class="hljs-string">&#x27;\\&#x27;</span>, <span class="hljs-string">&#x27;/&#x27;</span>);<br>          <span class="hljs-keyword">if</span> (!<span class="hljs-regexp">/http[s]*.*|\/\/.*/</span>.<span class="hljs-title function_">test</span>(src) &amp;&amp;<br>            !<span class="hljs-regexp">/^\s*\//</span>.<span class="hljs-title function_">test</span>(src)) &#123;<br>            <span class="hljs-comment">// For &quot;about&quot; page, the first part of &quot;src&quot; can&#x27;t be removed.</span><br>            <span class="hljs-comment">// In addition, to support multi-level local directory.</span><br>            <span class="hljs-keyword">var</span> linkArray = link.<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;/&#x27;</span>).<span class="hljs-title function_">filter</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">elem</span>) &#123;<br>              <span class="hljs-keyword">return</span> elem != <span class="hljs-string">&#x27;&#x27;</span>;<br>            &#125;);<br>            <span class="hljs-keyword">var</span> srcArray = src.<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;/&#x27;</span>).<span class="hljs-title function_">filter</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">elem</span>) &#123;<br>              <span class="hljs-keyword">return</span> elem != <span class="hljs-string">&#x27;&#x27;</span> &amp;&amp; elem != <span class="hljs-string">&#x27;.&#x27;</span>;<br>            &#125;);<br>            <span class="hljs-keyword">if</span> (srcArray.<span class="hljs-property">length</span> &gt; <span class="hljs-number">1</span>)<br>              srcArray.<span class="hljs-title function_">shift</span>();<br>            src = srcArray.<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27;/&#x27;</span>);<br>            $(<span class="hljs-variable language_">this</span>).<span class="hljs-title function_">attr</span>(<span class="hljs-string">&#x27;src&#x27;</span>, config.<span class="hljs-property">root</span> + link + src);<br>            <span class="hljs-variable language_">console</span>.<span class="hljs-property">info</span> &amp;&amp; <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">info</span>(<span class="hljs-string">&quot;update link as:--&gt;&quot;</span> + config.<span class="hljs-property">root</span> + link + src);<br>          &#125;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>          <span class="hljs-variable language_">console</span>.<span class="hljs-property">info</span> &amp;&amp; <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">info</span>(<span class="hljs-string">&quot;no src attr, skipped...&quot;</span>);<br>          <span class="hljs-variable language_">console</span>.<span class="hljs-property">info</span> &amp;&amp; <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">info</span>($(<span class="hljs-variable language_">this</span>));<br>        &#125;<br>      &#125;);<br>      data[key] = $.<span class="hljs-title function_">html</span>();<br>    &#125;<br>  &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+<p>这个插件只是在 hexo 规则的基础上，对图片的引用做出相应的配合，但是我的编写习惯是：</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs tcl">└── <span class="hljs-keyword">source</span><br>  └── _posts<br>    └── hexo<br>      ├── assets<br>      │ └── <span class="hljs-keyword">filename</span>.jpg<br>      └── hexo.md<br></code></pre></td></tr></table></figure>
+<p>我使用的是 Typora 作为笔记的编写工具，不想它作为博客的时候，需要改变，我希望它可以编译成下面得到这种情况：</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs axapta">└── <span class="hljs-keyword">public</span><br>  └── <span class="hljs-number">2023</span><br>    └── <span class="hljs-number">9</span><br>      └── <span class="hljs-number">5</span><br>        └── hexo<br>          ├── assets<br>          │ └── filename.jpg<br>          └── <span class="hljs-keyword">index</span>.html<br></code></pre></td></tr></table></figure>
+<h3 id="hexo-asset-file-carp">hexo-asset-file-carp</h3>
+<blockquote>
+<p>为了让 hexo 适应我的编写习惯，所以我在 <code>hexo-asset-image</code> 的插件基础上做出了调整，我将文章和资源文件夹看作一个整体，然后，资源文件夹默认在文章所在的文件夹下，只要文章到哪我把资源文件夹一起复制过去就可以了。</p>
+</blockquote>
+<p>下载插件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm i hexo-asset-file-carp<br></code></pre></td></tr></table></figure>
+<p>修改 <code>_config.yml</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yam">asset_dir: ./assets # 文章的资源文件夹，对于文章的相对路径<br></code></pre></td></tr></table></figure>
+<p><code>asset_dir</code> 是我自定义的配置项，默认为 <code>assets</code> 文件夹，你可以像 Typora 中的配置一样写：<code>./$&#123;filename&#125;.assets</code> ，插件会自动解析替换的。</p>
+<p>需要注意的是，这个插件的前提是你的资源文件夹处于文章的同目录下，如果是上一级目录，出问题，自负，或者你也可以自己写一个适合你习惯的插件。</p>
+<p>一定要软件适应你，如果你去适应软件，最后所有的记录就都不是统一的规范。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="../../../../categories/%E5%89%8D%E7%AB%AF/" class="category-chain-item">前端</a>
+  
+  
+    <span>></span>
+    
+  <a href="../../../../categories/%E5%89%8D%E7%AB%AF/nodejs/" class="category-chain-item">nodejs</a>
+  
+  
+    <span>></span>
+    
+  <a href="../../../../categories/%E5%89%8D%E7%AB%AF/nodejs/hexo/" class="category-chain-item">hexo</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+    
+      <span class="category-chain">
+        
+  <a href="../../../../categories/%E7%BD%91%E7%AB%99/" class="category-chain-item">网站</a>
+  
+  
+    <span>></span>
+    
+  <a href="../../../../categories/%E7%BD%91%E7%AB%99/%E5%8D%9A%E5%AE%A2/" class="category-chain-item">博客</a>
+  
+  
+    <span>></span>
+    
+  <a href="../../../../categories/%E7%BD%91%E7%AB%99/%E5%8D%9A%E5%AE%A2/hexo/" class="category-chain-item">hexo</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+    
+      <span class="category-chain">
+        
+  <a href="../../../../categories/top-specialcarp/" class="category-chain-item">top.specialcarp</a>
+  
+  
+    <span>></span>
+    
+  <a href="../../../../categories/top-specialcarp/blog/" class="category-chain-item">blog</a>
+  
+  
+    <span>></span>
+    
+  <a href="../../../../categories/top-specialcarp/blog/hexo/" class="category-chain-item">hexo</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="../../../../tags/hexo/" class="print-no-link">#hexo</a>
+      
+        <a href="../../../../tags/%E5%8D%9A%E5%AE%A2/" class="print-no-link">#博客</a>
+      
+        <a href="../../../../tags/nodejs/" class="print-no-link">#nodejs</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>hexo搭建静态博客</div>
+      <div>http://specialcarp.github.io/2023/11/14/hexo搭建静态博客/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>SpecialCarp</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年11月14日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-nc"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="../../15/hexo%E6%8C%87%E4%BB%A4/" title="hexo指令">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">hexo指令</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="../../10/hello-world/" title="Hello World">
+                        <span class="hidden-mobile">Hello World</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'SpecialCarp/SpecialCarp.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <!-- <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> --> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="../../../../js/events.js" ></script>
+<script  src="../../../../js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="../../../../js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="../../../../js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="../../../../js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
